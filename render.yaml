@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: an-cu
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: yarn install --frozen-lockfile && yarn build
+    startCommand: node dist/an-cu/server/server.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 22.20.0

@@ -39,7 +39,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": ["localhost", "localhost:4000"]
+              "allowedHosts": ["localhost", "localhost:4000", "*.onrender.com"]
             },
             "ssr": {
               "entry": "src/server.ts"
