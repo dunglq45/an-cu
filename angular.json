@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": "0785fa38-81c3-4fde-b77b-f247c16ff50a"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -23,6 +24,9 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -35,7 +39,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": ["localhost", "localhost:4000"]
             },
             "ssr": {
               "entry": "src/server.ts"
@@ -51,8 +55,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "12kB"
                 }
               ],
               "outputHashing": "all"

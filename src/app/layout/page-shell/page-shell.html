@@ -1,0 +1,18 @@
+<div class="page-shell" [class.page-shell--with-bottom-nav]="showBottomNav()">
+  <app-header [activeNav]="activeNav()" [ctaLabel]="ctaLabel()" [showPhoneIcon]="showPhoneIcon()" />
+  <app-mobile-topbar />
+
+  <main class="page-shell__content">
+    <ng-content />
+  </main>
+
+  @if (footerVariant() === 'full') {
+    <app-footer variant="full" />
+  } @else if (footerVariant() === 'compact') {
+    <app-footer variant="compact" />
+  }
+
+  @if (showBottomNav()) {
+    <app-mobile-bottom-nav />
+  }
+</div>

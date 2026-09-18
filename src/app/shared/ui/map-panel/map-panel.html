@@ -1,0 +1,114 @@
+<div class="map-panel">
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 500 940"
+    fill="none"
+    preserveAspectRatio="xMidYMid slice"
+    class="map-panel__illustration"
+  >
+    <rect width="500" height="940" fill="#E6E1D6" />
+    <path d="M-20 210 L520 150" stroke="#D5CFC1" stroke-width="10" />
+    <path d="M-20 520 L520 600" stroke="#D5CFC1" stroke-width="14" />
+    <path d="M120 -20 L180 960" stroke="#D5CFC1" stroke-width="8" />
+    <path d="M360 -20 L300 960" stroke="#D5CFC1" stroke-width="8" />
+    <path d="M-20 780 L520 820" stroke="#D5CFC1" stroke-width="6" />
+    <path d="M-20 660 C 140 700, 300 600, 520 700 L520 960 L-20 960 Z" fill="#DCE6E0" />
+    <rect x="30" y="250" width="70" height="52" fill="#DED8CA" />
+    <rect x="210" y="260" width="60" height="70" fill="#DED8CA" />
+    <rect x="390" y="300" width="80" height="60" fill="#DED8CA" />
+    <rect x="60" y="400" width="54" height="60" fill="#DED8CA" />
+    <rect x="330" y="450" width="76" height="46" fill="#DED8CA" />
+  </svg>
+
+  <div class="map-panel__toolbar map-panel__toolbar--left">
+    <button type="button" class="map-panel__toolbar-btn">
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#16403A"
+        stroke-width="1.4"
+        stroke-linecap="round"
+      >
+        <path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z" />
+        <path d="M9 4v14M15 6v14" />
+      </svg>
+      Vệ tinh
+    </button>
+    <button type="button" class="map-panel__toolbar-btn">Vẽ vùng</button>
+  </div>
+
+  <div class="map-panel__zoom">
+    <button type="button" aria-label="Phóng to" class="map-panel__zoom-btn">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#14201D"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      >
+        <path d="M12 5v14M5 12h14" />
+      </svg>
+    </button>
+    <button type="button" aria-label="Thu nhỏ" class="map-panel__zoom-btn">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#14201D"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      >
+        <path d="M5 12h14" />
+      </svg>
+    </button>
+  </div>
+
+  @for (pin of pins(); track pin.id) {
+    <button
+      type="button"
+      class="map-panel__pin"
+      [class.map-panel__pin--active]="pin.id === activePin().id"
+      [style.top]="pin.top"
+      [style.left]="pin.left"
+      (click)="selectPin(pin.id)"
+    >
+      {{ pin.price }}
+    </button>
+  }
+
+  @if (clusterLabel()) {
+    <span class="map-panel__cluster">{{ clusterLabel() }}</span>
+  }
+
+  @if (popupOpen() && activePin(); as pin) {
+    <div class="map-panel__popup">
+      <div class="map-panel__popup-media">
+        <app-media-placeholder icon="house" [iconSize]="26" />
+      </div>
+      <div class="map-panel__popup-body">
+        <div class="map-panel__popup-price">{{ preview().price }}</div>
+        <div class="map-panel__popup-title">{{ preview().title }}</div>
+        <div class="map-panel__popup-meta">{{ preview().meta }}</div>
+      </div>
+      <button type="button" aria-label="Đóng" class="map-panel__popup-close" (click)="closePopup()">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#14201D"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        >
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  }
+</div>

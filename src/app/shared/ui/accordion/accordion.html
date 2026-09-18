@@ -1,0 +1,45 @@
+<div class="accordion">
+  @for (item of items(); track item.id; let first = $first) {
+    <div class="accordion-item" [class.accordion-item--expanded]="isExpanded(item.id, first)">
+      <div class="accordion-item__header">
+        <h3 class="accordion-item__question">{{ item.question }}</h3>
+        <button
+          type="button"
+          class="accordion-item__toggle"
+          [attr.aria-label]="isExpanded(item.id, first) ? 'Thu gọn' : 'Mở rộng'"
+          [attr.aria-expanded]="isExpanded(item.id, first)"
+          (click)="toggle(item.id)"
+        >
+          @if (isExpanded(item.id, first)) {
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16403A"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            >
+              <path d="M5 12h14" />
+            </svg>
+          } @else {
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16403A"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          }
+        </button>
+      </div>
+      @if (isExpanded(item.id, first)) {
+        <p class="accordion-item__answer">{{ item.answer }}</p>
+      }
+    </div>
+  }
+</div>

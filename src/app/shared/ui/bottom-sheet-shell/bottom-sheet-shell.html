@@ -1,0 +1,31 @@
+@if (open()) {
+  <div class="sheet-scrim" (click)="close()"></div>
+  <div class="sheet">
+    <div class="sheet__handle-row">
+      <span class="sheet__handle"></span>
+    </div>
+    <div class="sheet__header">
+      <h2 class="sheet__title">{{ title() }}</h2>
+      <button type="button" class="sheet__reset" (click)="reset.emit()">{{ resetLabel() }}</button>
+      <button type="button" aria-label="Đóng" class="sheet__close" (click)="close()">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#14201D"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        >
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+    <div class="sheet__body">
+      <ng-content />
+    </div>
+    <div class="sheet__footer">
+      <ng-content select="[sheetFooter]" />
+    </div>
+  </div>
+}

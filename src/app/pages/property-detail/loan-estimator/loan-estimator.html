@@ -1,0 +1,58 @@
+@if (listing().loanEstimate; as loan) {
+  <div class="loan-estimator">
+    <h2 class="loan-estimator__title">Ước tính khoản vay</h2>
+    <p class="loan-estimator__subtitle">
+      Con số tham khảo, chưa bao gồm phí bảo hiểm và phí thẩm định.
+    </p>
+    <div class="loan-estimator__grid">
+      <div class="loan-estimator__inputs">
+        <div>
+          <div class="loan-estimator__row">
+            <label for="loan-amt" class="field-label">Số tiền vay</label>
+            <span class="loan-estimator__value">4,76 tỷ · 70%</span>
+          </div>
+          <input
+            id="loan-amt"
+            type="range"
+            min="0"
+            max="100"
+            value="70"
+            class="loan-estimator__slider"
+          />
+        </div>
+        <div class="loan-estimator__two-col">
+          <div class="loan-estimator__field">
+            <label for="loan-term" class="field-label">Thời hạn</label>
+            <select id="loan-term" class="select-input">
+              <option>20 năm</option>
+              <option>15 năm</option>
+              <option>25 năm</option>
+            </select>
+          </div>
+          <div class="loan-estimator__field">
+            <label for="loan-rate" class="field-label">Lãi suất / năm</label>
+            <input id="loan-rate" type="text" class="text-input" value="8,5 %" />
+          </div>
+        </div>
+      </div>
+      <div class="loan-estimator__result">
+        <div class="loan-estimator__result-label">Trả hàng tháng</div>
+        <div class="loan-estimator__result-value">{{ loan.monthlyPayment }}</div>
+        <div class="loan-estimator__breakdown">
+          <div class="loan-estimator__breakdown-row">
+            <span>Vốn tự có</span><span>{{ loan.downPayment }}</span>
+          </div>
+          <div class="loan-estimator__breakdown-row">
+            <span>Gốc + lãi kỳ đầu</span><span>{{ loan.principalAndFirstInterest }}</span>
+          </div>
+          <div class="loan-estimator__breakdown-row">
+            <span>Tổng lãi</span><span>{{ loan.totalInterest }}</span>
+          </div>
+        </div>
+        <button type="button" class="btn btn--secondary loan-estimator__cta">
+          Nhận tư vấn vay
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,24 @@
+<article class="project-card">
+  <a [routerLink]="link()" class="project-card__media">
+    <app-media-placeholder
+      icon="building"
+      caption="ẢNH DỰ ÁN · 4:3"
+      [iconSize]="40"
+      [imageUrl]="project().imageUrl"
+      [alt]="project().name"
+    >
+      @if (project().cardBadge) {
+        <span class="badge badge--vip project-card__badge">{{ project().cardBadge }}</span>
+      }
+    </app-media-placeholder>
+  </a>
+  <div class="project-card__body">
+    <div class="project-card__kicker">{{ project().district }} · {{ project().status }}</div>
+    <a [routerLink]="link()" class="project-card__title">{{ project().name }}</a>
+    <p class="project-card__description">{{ project().cardDescription }}</p>
+    <div class="project-card__price-row">
+      <span class="project-card__price-label">Từ</span>
+      <span class="project-card__price">{{ project().priceFrom }}</span>
+    </div>
+  </div>
+</article>

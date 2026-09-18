@@ -1,0 +1,134 @@
+<!-- desktop gallery -->
+<div class="gallery gallery--desktop">
+  <div class="gallery__main">
+    <app-media-placeholder
+      icon="house"
+      caption="ẢNH CHÍNH · 16:10"
+      [iconSize]="56"
+      imageUrl="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80"
+      alt="Phòng khách căn hộ view thành phố"
+    >
+      <span class="gallery__verified-badge">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#16403A"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+        Tin đã xác thực
+      </span>
+      <button type="button" class="gallery__view-all">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#14201D"
+          stroke-width="1.4"
+          stroke-linecap="round"
+        >
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+        Xem tất cả 12 ảnh
+      </button>
+    </app-media-placeholder>
+  </div>
+  <div class="gallery__side">
+    <div class="gallery__side-item">
+      <app-media-placeholder
+        icon="interior"
+        caption="ẢNH 2 · 4:3"
+        [iconSize]="34"
+        imageUrl="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80"
+        alt="Phòng bếp và khu vực sinh hoạt chung"
+      />
+    </div>
+    <div class="gallery__side-item">
+      <app-media-placeholder icon="tour360" caption="TOUR 360° · 4:3" [iconSize]="34">
+        <button type="button" class="btn btn--secondary gallery__tour-btn">Mở tour 360°</button>
+      </app-media-placeholder>
+    </div>
+  </div>
+</div>
+
+<!-- mobile gallery -->
+<div class="gallery gallery--mobile">
+  <app-media-placeholder
+    icon="house"
+    caption="ẢNH CHÍNH · 16:10"
+    [iconSize]="40"
+    imageUrl="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
+    alt="Phòng khách căn hộ view thành phố"
+  >
+    <a
+      routerLink="/tim-kiem"
+      aria-label="Quay lại"
+      class="gallery__mobile-btn gallery__mobile-btn--back"
+    >
+      <svg
+        width="19"
+        height="19"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#14201D"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      >
+        <path d="M15 6l-6 6 6 6" />
+      </svg>
+    </a>
+    <div class="gallery__mobile-actions">
+      <button type="button" aria-label="Lưu tin" class="gallery__mobile-btn">
+        <svg
+          width="19"
+          height="19"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#14201D"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 4h12v17l-6-4-6 4z" />
+        </svg>
+      </button>
+      <button type="button" aria-label="Chia sẻ" class="gallery__mobile-btn">
+        <svg
+          width="19"
+          height="19"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#14201D"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="18" cy="5" r="2.6" />
+          <circle cx="6" cy="12" r="2.6" />
+          <circle cx="18" cy="19" r="2.6" />
+          <path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3" />
+        </svg>
+      </button>
+    </div>
+    <span class="gallery__counter">{{ activeIndex() + 1 }}/12</span>
+    <div class="gallery__dots">
+      @for (dot of dots; track dot) {
+        <span
+          class="gallery__dot"
+          [class.gallery__dot--active]="dot === activeIndex()"
+          (click)="setIndex(dot)"
+        ></span>
+      }
+    </div>
+  </app-media-placeholder>
+</div>

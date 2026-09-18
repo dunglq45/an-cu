@@ -1,0 +1,210 @@
+<app-page-shell footerVariant="full" [showBottomNav]="false" activeNav="mua-ban">
+  <div class="sr-intro">
+    <app-breadcrumb [items]="breadcrumbItems" />
+    <h1 class="sr-intro__title">Mua bán căn hộ chung cư tại TP.HCM</h1>
+    <p class="sr-intro__subtitle">{{ listings.length }} kết quả · cập nhật hôm nay</p>
+  </div>
+
+  <div class="sr-body">
+    <!-- desktop filter sidebar -->
+    <aside class="sr-sidebar">
+      <div class="sr-sidebar__header">
+        <h2 class="sr-sidebar__title">Bộ lọc</h2>
+        <button type="button" class="sr-sidebar__reset">Xoá lọc</button>
+      </div>
+      <div class="sr-sidebar__search">
+        <label for="sr-kw" class="sr-sidebar__sr-label">Từ khoá</label>
+        <input id="sr-kw" type="text" class="text-input" value="Vinhomes Golden River" />
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#5A6663"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          class="sr-sidebar__search-icon"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-4.3-4.3" />
+        </svg>
+      </div>
+      <div class="sr-sidebar__filters">
+        <app-search-filter-form layout="sidebar" />
+      </div>
+      <button type="button" class="btn btn--secondary sr-sidebar__more">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#5A6663"
+          stroke-width="1.4"
+          stroke-linecap="round"
+        >
+          <path d="M4 6h16M7 12h10M10 18h4" />
+        </svg>
+        Bộ lọc khác
+      </button>
+      <button type="button" class="btn btn--primary sr-sidebar__apply">Áp dụng · 24 tin</button>
+    </aside>
+
+    <!-- results list -->
+    <div class="sr-list">
+      <button
+        type="button"
+        class="btn btn--secondary sr-list__mobile-filter-btn"
+        (click)="filterSheetOpen.set(true)"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#16403A"
+          stroke-width="1.4"
+          stroke-linecap="round"
+        >
+          <path d="M4 6h16M7 12h10M10 18h4" />
+        </svg>
+        Bộ lọc
+      </button>
+
+      <div class="sr-list__toolbar">
+        <span class="sr-list__count">Hiển thị 1–{{ listings.length }} trong 24 tin</span>
+        <div class="sr-list__sort">
+          <label for="sr-sort" class="sr-list__sort-label">Sắp xếp</label>
+          <select
+            id="sr-sort"
+            class="select-input"
+            [value]="sortBy()"
+            (change)="sortBy.set($any($event.target).value)"
+          >
+            <option value="moi-nhat">Mới nhất</option>
+            <option value="gia-thap-den-cao">Giá thấp → cao</option>
+          </select>
+        </div>
+      </div>
+
+      @for (listing of listings; track listing.id) {
+        <app-listing-card
+          [listing]="listing"
+          variant="search-result"
+          [agent]="agentFor(listing.agentId)"
+        />
+      }
+
+      <div class="sr-list__save-search">
+        <span class="sr-list__save-icon">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#A9762B"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 21a6 6 0 0 0-12 0" />
+            <path d="M12 3v6" />
+            <path d="M9 6l3-3 3 3" />
+            <path d="M4 21h16" />
+          </svg>
+        </span>
+        <div>
+          <h3 class="sr-list__save-title">Lưu tìm kiếm này</h3>
+          <p class="sr-list__save-desc">
+            Nhận email khi có tin mới khớp bộ lọc: căn hộ chung cư · TP.HCM · 3–7 tỷ.
+          </p>
+        </div>
+        <button type="button" class="btn btn--accent sr-list__save-btn">Lưu tìm kiếm</button>
+      </div>
+
+      <nav class="sr-pagination">
+        <button
+          type="button"
+          aria-label="Trang trước"
+          class="sr-pagination__btn"
+          [disabled]="currentPage() === 1"
+          (click)="goToPage(currentPage() - 1)"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#14201D"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          >
+            <path d="M15 6l-6 6 6 6" />
+          </svg>
+        </button>
+        @for (page of [1, 2, 3]; track page) {
+          <button
+            type="button"
+            class="sr-pagination__btn"
+            [class.sr-pagination__btn--active]="currentPage() === page"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+        <span class="sr-pagination__ellipsis">…</span>
+        <button type="button" class="sr-pagination__btn" (click)="goToPage(totalPages())">
+          {{ totalPages() }}
+        </button>
+        <button
+          type="button"
+          aria-label="Trang sau"
+          class="sr-pagination__btn"
+          (click)="goToPage(currentPage() + 1)"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#14201D"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          >
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <!-- desktop map panel -->
+    <div class="sr-map">
+      <app-map-panel [pins]="mapPins" [preview]="mapPreview" clusterLabel="+12 tin" />
+    </div>
+  </div>
+
+  <app-bottom-sheet-shell [(open)]="filterSheetOpen" title="Bộ lọc">
+    <app-search-filter-form layout="sheet" />
+    <button type="button" class="btn btn--secondary sr-sheet__more">
+      Bộ lọc khác (hướng, pháp lý, nội thất)
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#5A6663"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      >
+        <path d="M9 6l6 6-6 6" />
+      </svg>
+    </button>
+    <div sheetFooter class="sr-sheet__footer">
+      <button type="button" class="btn btn--secondary" (click)="filterSheetOpen.set(false)">
+        Đặt lại
+      </button>
+      <button type="button" class="btn btn--primary" (click)="filterSheetOpen.set(false)">
+        Xem 24 tin
+      </button>
+    </div>
+  </app-bottom-sheet-shell>
+</app-page-shell>

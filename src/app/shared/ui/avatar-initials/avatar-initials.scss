@@ -1,0 +1,15 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font: 600 1em / 1 var(--font-sans);
+}
+
+.avatar--accent {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-soft-text);
+}

@@ -1,0 +1,321 @@
+<app-page-shell
+  footerVariant="full"
+  [showBottomNav]="true"
+  activeNav="mua-ban"
+  [showPhoneIcon]="true"
+>
+  <!-- ═══ DESKTOP HERO + SEARCH ═══ -->
+  <section class="home-hero home-hero--desktop">
+    <div class="home-hero__inner">
+      <div class="section-kicker section-kicker--on-dark">Sàn phân phối chính thức</div>
+      <h1 class="home-hero__title">Tìm đúng căn nhà, ở đúng khu vực bạn muốn sống</h1>
+      <p class="home-hero__subtitle">
+        Hơn 24.000 tin đăng đã xác thực từ chủ nhà và môi giới chuyên nghiệp tại TP.HCM, Hà Nội và
+        các tỉnh lân cận.
+      </p>
+      <div class="home-hero__stats">
+        <div>
+          <div class="home-hero__stat-value">24.000+</div>
+          <div class="home-hero__stat-label">Tin đăng đã xác thực</div>
+        </div>
+        <div>
+          <div class="home-hero__stat-value">86</div>
+          <div class="home-hero__stat-label">Dự án đang phân phối</div>
+        </div>
+        <div>
+          <div class="home-hero__stat-value">1.240</div>
+          <div class="home-hero__stat-label">Môi giới chứng chỉ hành nghề</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-search home-search--desktop">
+    <div class="home-search__card">
+      <app-segmented-control [options]="searchTypeOptions" [(selected)]="searchType" />
+      <form class="home-search__form" (submit)="$event.preventDefault()">
+        <div class="home-search__field">
+          <label for="hp-kw" class="field-label">Từ khoá</label>
+          <input
+            id="hp-kw"
+            type="text"
+            class="text-input"
+            placeholder="Tên dự án, đường, phường…"
+          />
+        </div>
+        <div class="home-search__field">
+          <label for="hp-area" class="field-label">Khu vực</label>
+          <select id="hp-area" class="select-input">
+            <option>TP.HCM</option>
+            <option>Hà Nội</option>
+          </select>
+        </div>
+        <div class="home-search__field">
+          <label for="hp-type" class="field-label">Loại hình</label>
+          <select id="hp-type" class="select-input">
+            <option>Căn hộ chung cư</option>
+            <option>Nhà phố</option>
+          </select>
+        </div>
+        <div class="home-search__field">
+          <label for="hp-price" class="field-label">Mức giá</label>
+          <select id="hp-price" class="select-input">
+            <option>Tất cả mức giá</option>
+            <option>3 – 7 tỷ</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary home-search__submit">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F7F4EE"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-4.3-4.3" />
+          </svg>
+          Tìm kiếm
+        </button>
+      </form>
+      <div class="home-search__quick">
+        <span class="home-search__quick-label">Tìm nhiều:</span>
+        @for (
+          chip of [
+            'Căn hộ Q.7',
+            'Vinhomes Golden River',
+            'Nhà phố Thủ Đức',
+            'Officetel cho thuê',
+            'Dưới 3 tỷ',
+          ];
+          track chip
+        ) {
+          <a routerLink="/tim-kiem" class="home-search__quick-chip">{{ chip }}</a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MOBILE HERO + SEARCH ═══ -->
+  <section class="home-hero home-hero--mobile">
+    <div class="section-kicker section-kicker--on-dark">Sàn phân phối chính thức</div>
+    <h1 class="home-hero__title home-hero__title--mobile">Tìm đúng căn nhà của bạn</h1>
+    <p class="home-hero__subtitle">24.000 tin đăng đã xác thực trên toàn quốc.</p>
+  </section>
+
+  <section class="home-search home-search--mobile">
+    <div class="home-search__card">
+      <app-segmented-control [options]="searchTypeOptions" [(selected)]="searchType" />
+      <div class="home-search__mobile-field">
+        <label for="m-kw" class="home-search__sr-label">Từ khoá</label>
+        <input id="m-kw" type="text" class="text-input" placeholder="Khu vực, dự án, đường…" />
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#5A6663"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          class="home-search__mobile-icon"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-4.3-4.3" />
+        </svg>
+      </div>
+      <button type="button" class="btn btn--primary home-search__mobile-submit">Tìm kiếm</button>
+    </div>
+  </section>
+
+  <section class="home-chips">
+    @for (chip of ['Căn hộ', 'Nhà phố', 'Dưới 3 tỷ', 'Q.7']; track chip; let i = $index) {
+      <button
+        type="button"
+        class="chip home-chips__chip"
+        [class.chip--selected]="activeChip() === chip || (activeChip() === null && i === 0)"
+        (click)="selectChip(chip)"
+      >
+        {{ chip }}
+      </button>
+    }
+  </section>
+
+  <!-- ═══ DỰ ÁN NỔI BẬT (desktop only) ═══ -->
+  <section class="home-section home-section--desktop-only">
+    <div class="home-section__header">
+      <div>
+        <div class="section-kicker">Phân phối chính thức</div>
+        <h2 class="home-section__title">Dự án nổi bật</h2>
+      </div>
+      <a routerLink="/" class="home-section__link">
+        Xem tất cả dự án
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#16403A"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </div>
+    <div class="home-grid home-grid--3col">
+      @for (project of projects; track project.id) {
+        <app-project-card [project]="project" />
+      }
+    </div>
+  </section>
+
+  <!-- ═══ KHU VỰC (desktop only) ═══ -->
+  <section class="home-section home-section--desktop-only">
+    <h2 class="home-section__title">Khám phá theo khu vực</h2>
+    <div class="home-grid home-grid--4col">
+      @for (area of areas; track area.id) {
+        <a routerLink="/tim-kiem" class="home-area-card">
+          <div class="home-area-card__media">
+            <app-media-placeholder
+              icon="building"
+              [caption]="area.imageCaption"
+              [iconSize]="34"
+              [imageUrl]="area.imageUrl"
+              [alt]="area.name"
+            />
+          </div>
+          <div class="home-area-card__footer">
+            <span class="home-area-card__name">{{ area.name }}</span>
+            <span class="home-area-card__count">{{ area.listingCountLabel }}</span>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- ═══ BĐS MỚI ĐĂNG — desktop grid ═══ -->
+  <section class="home-section home-section--desktop-only">
+    <div class="home-section__header">
+      <h2 class="home-section__title">BĐS mới đăng</h2>
+      <a routerLink="/tim-kiem" class="home-section__link">
+        Xem tất cả
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#16403A"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </div>
+    <div class="home-grid home-grid--4col">
+      @for (listing of newestListings; track listing.id) {
+        <app-listing-card [listing]="listing" variant="grid" />
+      }
+    </div>
+  </section>
+
+  <!-- ═══ BĐS MỚI ĐĂNG — mobile list ═══ -->
+  <section class="home-section home-section--mobile-only">
+    <div class="home-section__header">
+      <h2 class="home-section__title home-section__title--mobile">BĐS mới đăng</h2>
+      <a routerLink="/tim-kiem" class="home-section__link home-section__link--mobile">Xem tất cả</a>
+    </div>
+    <div class="home-mobile-list">
+      @for (listing of newestListings.slice(0, 3); track listing.id) {
+        <app-listing-card [listing]="listing" variant="mobile-horizontal" />
+      }
+    </div>
+  </section>
+
+  <!-- ═══ VALUE PROPS (desktop only) ═══ -->
+  <section class="home-section home-section--desktop-only">
+    <div class="home-grid home-grid--3col">
+      <div class="home-value-card">
+        <span class="home-value-card__icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16403A"
+            stroke-width="1.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </span>
+        <h4 class="home-value-card__title">Tin đăng đã xác thực</h4>
+        <p class="home-value-card__desc">
+          Mỗi tin được đối chiếu giấy tờ pháp lý và ảnh thực tế trước khi lên sàn.
+        </p>
+      </div>
+      <div class="home-value-card">
+        <span class="home-value-card__icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16403A"
+            stroke-width="1.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="8" r="3.2" />
+            <path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" />
+            <path d="M16 11h5M18.5 8.5v5" />
+          </svg>
+        </span>
+        <h4 class="home-value-card__title">Môi giới có chứng chỉ</h4>
+        <p class="home-value-card__desc">
+          1.240 môi giới hoạt động, hồ sơ và đánh giá công khai trên hồ sơ cá nhân.
+        </p>
+      </div>
+      <div class="home-value-card">
+        <span class="home-value-card__icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#16403A"
+            stroke-width="1.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 19V9M10 19V5M16 19v-7M22 19H2" />
+          </svg>
+        </span>
+        <h4 class="home-value-card__title">Dữ liệu giá theo khu vực</h4>
+        <p class="home-value-card__desc">
+          So sánh giá trung bình m² từng phường trước khi xuống tiền.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BAND (desktop only) ═══ -->
+  <section class="home-section home-section--desktop-only">
+    <div class="home-cta">
+      <div class="home-cta__text">
+        <h3 class="home-cta__title">Bạn đang có bất động sản cần bán hoặc cho thuê?</h3>
+        <p class="home-cta__desc">
+          Ký gửi cho AN CƯ — chúng tôi chụp ảnh, định giá và kết nối khách trong 3 ngày.
+        </p>
+      </div>
+      <div class="home-cta__actions">
+        <button type="button" class="btn btn--accent">Ký gửi BĐS</button>
+        <button type="button" class="btn btn--outline-on-dark">Gọi 1900 6688</button>
+      </div>
+    </div>
+  </section>
+</app-page-shell>

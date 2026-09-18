@@ -1,0 +1,133 @@
+@use 'breakpoints' as bp;
+
+.gallery--desktop {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 12px;
+  height: 520px;
+
+  @include bp.mobile {
+    display: none;
+  }
+}
+
+.gallery__main {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.gallery__verified-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font: 600 13px/1 var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gallery__view-all {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--radius-control);
+  background: #fff;
+  color: var(--color-text);
+  font: 600 14px/1 var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.gallery__side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+
+.gallery__side-item {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.gallery__tour-btn {
+  position: absolute;
+  bottom: 16px;
+}
+
+.gallery--mobile {
+  display: none;
+  height: 248px;
+  position: relative;
+
+  @include bp.mobile {
+    display: block;
+  }
+}
+
+.gallery__mobile-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery__mobile-btn--back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.gallery__mobile-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.gallery__counter {
+  position: absolute;
+  bottom: 44px;
+  right: 16px;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-dark);
+  color: var(--color-surface);
+  font: 600 12px/1 var(--font-sans);
+}
+
+.gallery__dots {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.gallery__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  cursor: pointer;
+}
+
+.gallery__dot--active {
+  width: 18px;
+  background: var(--color-primary-dark);
+}

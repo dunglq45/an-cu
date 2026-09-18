@@ -1,0 +1,52 @@
+@use 'breakpoints' as bp;
+
+.mobile-topbar {
+  display: none;
+  height: 56px;
+  background: var(--color-primary-dark);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+
+  @include bp.mobile {
+    display: flex;
+  }
+}
+
+.mobile-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-topbar__logo-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-topbar__wordmark {
+  font: 700 17px/1 var(--font-serif);
+  letter-spacing: 0.06em;
+  color: var(--color-surface);
+}
+
+.mobile-topbar__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.mobile-topbar__icon-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

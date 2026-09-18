@@ -1,0 +1,17 @@
+<div class="booking-card">
+  <h3 class="booking-card__title">Đặt lịch xem nhà</h3>
+  <p class="booking-card__desc">Chọn buổi bạn rảnh, môi giới xác nhận trong 30 phút.</p>
+  <div class="booking-card__dates">
+    @for (option of dateOptions; track option.id) {
+      <button
+        type="button"
+        class="booking-card__date"
+        [class.booking-card__date--active]="selectedDate() === option.id"
+        (click)="selectedDate.set(option.id)"
+      >
+        {{ option.weekday }}<br />{{ option.date }}
+      </button>
+    }
+  </div>
+  <button type="button" class="btn btn--accent booking-card__cta">Đặt lịch xem</button>
+</div>

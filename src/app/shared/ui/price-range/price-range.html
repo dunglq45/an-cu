@@ -1,0 +1,28 @@
+<div class="price-range">
+  <input
+    type="range"
+    min="0"
+    max="100"
+    class="price-range__slider"
+    [value]="rangeValue()"
+    (input)="rangeValue.set($any($event.target).valueAsNumber)"
+    aria-label="Khoảng giá"
+  />
+  <div class="price-range__inputs">
+    <input
+      type="text"
+      class="text-input"
+      [value]="minValue()"
+      (input)="minValue.set($any($event.target).value)"
+      aria-label="Giá từ"
+    />
+    <span class="price-range__sep">–</span>
+    <input
+      type="text"
+      class="text-input"
+      [value]="maxValue()"
+      (input)="maxValue.set($any($event.target).value)"
+      aria-label="Giá đến"
+    />
+  </div>
+</div>

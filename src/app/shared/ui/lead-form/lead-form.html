@@ -1,0 +1,76 @@
+@if (variant() === 'phone-only') {
+  <form class="lead-form lead-form--phone" (submit)="$event.preventDefault(); onSubmit()">
+    <div class="lead-form__phone-row">
+      <div class="lead-form__field">
+        <label for="gate-phone" class="field-label">Số điện thoại</label>
+        <input id="gate-phone" type="tel" class="text-input" placeholder="09xx xxx xxx" />
+      </div>
+      <button type="submit" class="btn btn--accent">Mở bảng giá</button>
+    </div>
+    @if (helperText()) {
+      <p class="lead-form__helper">{{ helperText() }}</p>
+    }
+  </form>
+} @else {
+  <form
+    class="lead-form"
+    [class.lead-form--dark]="theme() === 'dark'"
+    (submit)="$event.preventDefault(); onSubmit()"
+  >
+    <div class="lead-form__field">
+      <label for="lf-name" class="lead-form__label">Họ và tên</label>
+      <input id="lf-name" type="text" class="text-input" placeholder="Nguyễn Văn A" />
+    </div>
+    <div class="lead-form__field">
+      <label for="lf-phone" class="lead-form__label">Số điện thoại</label>
+      <input id="lf-phone" type="tel" class="text-input" placeholder="09xx xxx xxx" />
+    </div>
+    @if (interestOptions(); as options) {
+      <div class="lead-form__field">
+        <label for="lf-interest" class="lead-form__label">Quan tâm loại căn</label>
+        <select id="lf-interest" class="select-input">
+          @for (option of options; track option) {
+            <option>{{ option }}</option>
+          }
+        </select>
+      </div>
+    }
+    <div class="lead-form__field">
+      <label for="lf-msg" class="lead-form__label">Lời nhắn</label>
+      <textarea
+        id="lf-msg"
+        rows="3"
+        class="lead-form__textarea"
+        [placeholder]="messagePlaceholder()"
+      ></textarea>
+    </div>
+    @if (consentText()) {
+      <label class="lead-form__consent">
+        <input type="checkbox" />
+        {{ consentText() }}
+      </label>
+    }
+    <button type="submit" class="btn btn--accent lead-form__submit">{{ submitLabel() }}</button>
+    @if (helperText()) {
+      <p class="lead-form__helper">{{ helperText() }}</p>
+    }
+    @if (footNote()) {
+      <div class="lead-form__footnote">
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+        >
+          <path
+            d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.5a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.8.4 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"
+          />
+        </svg>
+        <span>{{ footNote() }}</span>
+      </div>
+    }
+  </form>
+}

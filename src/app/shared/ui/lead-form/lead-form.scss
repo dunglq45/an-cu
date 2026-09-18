@@ -1,0 +1,104 @@
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lead-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lead-form__label {
+  font: 500 13px/1 var(--font-sans);
+  color: var(--color-text);
+}
+
+.lead-form__textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  font: 400 15px/1.5 var(--font-sans);
+  color: var(--color-text);
+  outline: none;
+  resize: none;
+  font-family: var(--font-sans);
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+  }
+}
+
+.lead-form__consent {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 13px/1.5 var(--font-sans);
+  color: var(--color-text-muted);
+  cursor: pointer;
+
+  input {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--color-accent);
+  }
+}
+
+.lead-form__submit {
+  height: 48px;
+  width: 100%;
+}
+
+.lead-form__helper {
+  margin: 0;
+  font: 400 12px/1.5 var(--font-sans);
+  color: var(--color-text-muted);
+}
+
+.lead-form__footnote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 6px;
+  color: var(--color-on-dark-2);
+  font: 400 13px/1.5 var(--font-sans);
+}
+
+/* dark theme (project consultation card) */
+.lead-form--dark {
+  .lead-form__label {
+    color: var(--color-on-dark-1);
+  }
+
+  .text-input,
+  .select-input,
+  .lead-form__textarea {
+    border-color: var(--color-on-dark-5);
+    background: var(--color-surface);
+  }
+
+  .lead-form__consent {
+    color: var(--color-on-dark-1);
+  }
+}
+
+/* phone-only variant */
+.lead-form--phone {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lead-form__phone-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.lead-form__phone-row .lead-form__field {
+  flex: 1;
+}

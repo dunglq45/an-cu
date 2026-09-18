@@ -1,6 +1,8 @@
 # AnCu
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+An Angular 21 SSR real-estate listings site (property/project search and detail pages, Vietnamese routes). Generated with [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+
+For architecture notes (routing/SSR setup, mock data layer, component layout) see [CLAUDE.md](CLAUDE.md). For design tokens and shared UI classes see [docs/design/tokens.md](docs/design/tokens.md).
 
 ## Development server
 

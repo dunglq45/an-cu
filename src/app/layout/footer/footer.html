@@ -1,0 +1,65 @@
+@if (variant() === 'compact') {
+  <footer class="app-footer app-footer--compact">
+    <span class="app-footer__wordmark app-footer__wordmark--compact">AN CƯ</span>
+    <span class="app-footer__compact-note">© 2026 AN CƯ · {{ compactNote() }}</span>
+  </footer>
+} @else {
+  <footer class="app-footer">
+    <div class="app-footer__grid">
+      <div>
+        <div class="app-footer__brand">
+          <span class="app-footer__logo-mark">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16403A"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 11l9-7 9 7" />
+              <path d="M5 10v10h14V10" />
+            </svg>
+          </span>
+          <span class="app-footer__wordmark">AN CƯ</span>
+        </div>
+        <p class="app-footer__desc">
+          Sàn phân phối bất động sản — mua bán, cho thuê và phân phối dự án tại Việt Nam.
+        </p>
+        <p class="app-footer__address">
+          120 Nguyễn Huệ, Quận 1, TP.HCM<br />hello&#64;ancu.vn · 1900 6688
+        </p>
+      </div>
+      <div>
+        <div class="app-footer__col-title">Danh mục</div>
+        <div class="app-footer__col-links">
+          <a routerLink="/tim-kiem">Mua bán căn hộ</a>
+          <a routerLink="/tim-kiem">Nhà phố · biệt thự</a>
+          <a routerLink="/tim-kiem">Cho thuê</a>
+          <a routerLink="/">Dự án mở bán</a>
+        </div>
+      </div>
+      <div>
+        <div class="app-footer__col-title">Công ty</div>
+        <div class="app-footer__col-links">
+          <a routerLink="/">Về AN CƯ</a>
+          <a routerLink="/">Tuyển dụng</a>
+          <a routerLink="/">Hợp tác môi giới</a>
+          <a routerLink="/">Tin tức</a>
+        </div>
+      </div>
+      <div>
+        <div class="app-footer__col-title">Hỗ trợ</div>
+        <div class="app-footer__col-links">
+          <a routerLink="/">Hướng dẫn đăng tin</a>
+          <a routerLink="/">Quy chế hoạt động</a>
+          <a routerLink="/">Chính sách bảo mật</a>
+          <a routerLink="/">Liên hệ</a>
+        </div>
+      </div>
+    </div>
+    <div class="app-footer__bottom">© 2026 AN CƯ. Giấy phép sàn giao dịch BĐS số 041/SGD-BXD.</div>
+  </footer>
+}

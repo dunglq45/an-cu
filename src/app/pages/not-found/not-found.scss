@@ -1,0 +1,116 @@
+@use 'breakpoints' as bp;
+
+.not-found {
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 48px 24px;
+
+  @include bp.mobile {
+    min-height: 520px;
+  }
+}
+
+.not-found__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -54%);
+  font: 600 420px/1 var(--font-serif);
+  color: var(--color-primary-soft);
+  letter-spacing: -0.02em;
+  user-select: none;
+
+  @include bp.mobile {
+    font-size: 200px;
+  }
+}
+
+.not-found__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found__title {
+  margin: 16px 0 0;
+  font: 600 48px/1.15 var(--font-serif);
+  color: var(--color-text);
+
+  @include bp.mobile {
+    font-size: 30px;
+  }
+}
+
+.not-found__desc {
+  margin: 14px 0 0;
+  max-width: 520px;
+  font: 400 16px/1.62 var(--font-sans);
+  color: var(--color-text-muted);
+}
+
+.not-found__search {
+  margin-top: 32px;
+  width: 480px;
+  max-width: 100%;
+  display: flex;
+  gap: 12px;
+}
+
+.not-found__search-field {
+  flex: 1;
+  position: relative;
+}
+
+.not-found__search-field .text-input {
+  height: 52px;
+  padding-left: 44px;
+}
+
+.not-found__search-icon {
+  position: absolute;
+  left: 15px;
+  top: 17px;
+}
+
+.not-found__sr-label {
+  position: absolute;
+  left: -9999px;
+}
+
+.not-found__links {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.not-found__pill {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: #fff;
+  font: 500 14px/1 var(--font-sans);
+  color: var(--color-text);
+
+  &:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-soft);
+  }
+}
+
+.not-found__pill--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 600;
+}

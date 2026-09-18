@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'app/styles/tokens';
+@use 'app/styles/utilities';
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}

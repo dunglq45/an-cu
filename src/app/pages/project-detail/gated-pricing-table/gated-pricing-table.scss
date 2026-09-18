@@ -1,0 +1,172 @@
+@use 'breakpoints' as bp;
+
+.gated-pricing__title {
+  margin: 12px 0 0;
+  font: 600 34px/1.2 var(--font-serif);
+  color: var(--color-text);
+
+  @include bp.mobile {
+    font-size: 24px;
+  }
+}
+
+.gated-pricing__subtitle {
+  margin: 10px 0 0;
+  max-width: 680px;
+  font: 400 15px/1.62 var(--font-sans);
+  color: var(--color-text-muted);
+}
+
+.gated-pricing__table-wrap {
+  margin-top: 32px;
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.gated-pricing__table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-border);
+    font: 500 15px/1.4 var(--font-sans);
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.gated-pricing__row--blurred {
+  filter: blur(5px);
+  opacity: 0.85;
+  user-select: none;
+}
+
+.gated-pricing__code {
+  font-weight: 500;
+}
+
+.gated-pricing__muted {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.gated-pricing__price {
+  font: 600 17px/1 var(--font-serif);
+  color: var(--color-primary);
+}
+
+.gated-pricing__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 196px;
+  background: rgba(247, 244, 238, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+
+  @include bp.mobile {
+    top: 140px;
+    padding: 16px;
+  }
+}
+
+.gated-pricing__gate-card {
+  max-width: 620px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 32px;
+  display: flex;
+  gap: 24px;
+
+  @include bp.mobile {
+    padding: 20px;
+    flex-direction: column;
+  }
+}
+
+.gated-pricing__gate-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gated-pricing__gate-body {
+  flex: 1;
+}
+
+.gated-pricing__gate-title {
+  margin: 0;
+  font: 600 24px/1.25 var(--font-serif);
+  color: var(--color-text);
+}
+
+.gated-pricing__gate-body app-lead-form {
+  display: block;
+  margin-top: 20px;
+}
+
+.gated-pricing__schedule {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  @include bp.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gated-pricing__schedule-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+.gated-pricing__schedule-title {
+  font: 600 12px/1 var(--font-sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.gated-pricing__schedule-percent {
+  margin-top: 10px;
+  font: 600 24px/1 var(--font-serif);
+  color: var(--color-primary);
+}
+
+.gated-pricing__schedule-desc {
+  margin-top: 8px;
+  font: 400 14px/1.5 var(--font-sans);
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,279 @@
+<app-page-shell
+  footerVariant="compact"
+  [showBottomNav]="false"
+  activeNav="du-an"
+  ctaLabel="Nhận bảng giá"
+>
+  <!-- hero -->
+  <section class="pj-hero">
+    <div class="pj-hero__inner">
+      <app-breadcrumb [items]="breadcrumbItems()" [onDark]="true" class="pj-hero__breadcrumb" />
+      <div class="pj-hero__row">
+        <div class="pj-hero__main">
+          <div class="pj-hero__badges">
+            <span class="badge badge--vip">{{ project().status }}</span>
+            <span class="pj-hero__badge-official">Phân phối chính thức</span>
+          </div>
+          <h1 class="pj-hero__title">{{ project().name }}</h1>
+          <div class="pj-hero__developer">
+            Chủ đầu tư {{ project().developer }} · AN CƯ phân phối chính thức
+          </div>
+          <div class="pj-hero__address">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#C3D1CB"
+              stroke-width="1.3"
+              stroke-linecap="round"
+            >
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            {{ project().address }}
+          </div>
+          <div class="pj-hero__actions">
+            <button type="button" class="btn btn--accent">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#fff"
+                stroke-width="1.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M7 3h7l4 4v14H7z" />
+                <path d="M14 3v4h4" />
+                <path d="M10 14h5" />
+              </svg>
+              Nhận bảng giá
+            </button>
+            <button type="button" class="btn btn--outline-on-dark">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#F7F4EE"
+                stroke-width="1.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <ellipse cx="12" cy="12" rx="9" ry="4.5" />
+                <path d="M12 3a9 9 0 0 1 0 18 9 9 0 0 1 0-18z" />
+              </svg>
+              Tour 360°
+            </button>
+          </div>
+        </div>
+        <div class="pj-hero__price-card">
+          <div class="field-label">Giá từ</div>
+          <div class="pj-hero__price">{{ project().priceFrom }}</div>
+          <div class="pj-hero__price-unit">{{ project().priceFromUnit }}</div>
+          <div class="pj-hero__price-rows">
+            <div class="pj-hero__price-row">
+              <span>Bàn giao</span><span>{{ project().handoverLabel }}</span>
+            </div>
+            <div class="pj-hero__price-row">
+              <span>Loại hình</span><span>{{ project().unitTypeLabel }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- stat strip -->
+  <section class="pj-stats">
+    <div class="pj-stats__inner">
+      @for (stat of project().stats; track stat.label) {
+        <div class="pj-stats__item">
+          <div class="field-label">{{ stat.label }}</div>
+          <div class="pj-stats__value">{{ stat.value }}</div>
+          <div class="pj-stats__sublabel">{{ stat.sublabel }}</div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- section nav -->
+  <nav class="pj-nav">
+    <div class="pj-nav__inner">
+      @for (item of sectionNav; track item.id) {
+        <a
+          [href]="'#' + item.id"
+          class="pj-nav__link"
+          [class.pj-nav__link--active]="activeSection() === item.id"
+          (click)="selectSection(item.id)"
+          >{{ item.label }}</a
+        >
+      }
+    </div>
+  </nav>
+
+  <!-- tổng quan -->
+  <section id="tong-quan" class="pj-section">
+    <div class="pj-section__inner">
+      <div class="section-kicker">Tổng quan</div>
+      <h2 class="pj-section__title">Chủ đầu tư · quy mô · pháp lý</h2>
+      <div class="pj-overview-grid">
+        @for (card of project().overviewCards; track card.title) {
+          <div class="pj-overview-card">
+            <h3 class="pj-overview-card__title">{{ card.title }}</h3>
+            <div class="pj-overview-card__rows">
+              @for (row of card.rows; track row.label) {
+                <div class="pj-overview-card__row">
+                  <span>{{ row.label }}</span
+                  ><span>{{ row.value }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+        <div class="pj-overview-card">
+          <h3 class="pj-overview-card__title">Pháp lý</h3>
+          <div class="pj-legal-list">
+            @for (item of project().legalChecklist; track item.label) {
+              <div class="pj-legal-list__item" [class.pj-legal-list__item--pending]="item.pending">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  [attr.stroke]="item.pending ? '#5A6663' : '#16403A'"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M8.5 12l2.5 2.5 4.5-5" />
+                </svg>
+                <span>{{ item.label }}</span>
+              </div>
+            }
+            <div class="pj-legal-note">{{ project().legalNote }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- mặt bằng -->
+  @if (project().towers.length) {
+    <section id="mat-bang" class="pj-section">
+      <div class="pj-section__inner">
+        <app-floor-plan [project]="project()" />
+      </div>
+    </section>
+  }
+
+  <!-- bảng giá -->
+  @if (project().priceTable.length) {
+    <section id="bang-gia" class="pj-section">
+      <div class="pj-section__inner">
+        <app-gated-pricing-table [project]="project()" />
+      </div>
+    </section>
+  }
+
+  <!-- tiến độ -->
+  @if (project().constructionSteps.length) {
+    <section id="tien-do" class="pj-section">
+      <div class="pj-section__inner">
+        <div class="pj-section__header">
+          <div>
+            <div class="section-kicker">Tiến độ</div>
+            <h2 class="pj-section__title">Tiến độ xây dựng theo ảnh</h2>
+            <p class="pj-section__subtitle">
+              Ảnh do AN CƯ chụp tại công trường, cập nhật mỗi 2 tuần.
+            </p>
+          </div>
+          <a routerLink="." class="pj-section__link">
+            Xem toàn bộ album
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16403A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+        <div class="pj-timeline">
+          <div class="pj-timeline__line"></div>
+          @for (step of project().constructionSteps; track step.label) {
+            <div
+              class="pj-timeline__item"
+              [class.pj-timeline__item--dimmed]="step.status === 'upcoming'"
+            >
+              <span class="pj-timeline__dot" [class]="'pj-timeline__dot--' + step.status"></span>
+              <div class="pj-timeline__date" [class]="'pj-timeline__date--' + step.status">
+                {{ step.date }}
+              </div>
+              <div class="pj-timeline__media">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#8C918A"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 20h18" />
+                  <path d="M5 20V9h6v11" />
+                  <path d="M13 20V4h6v16" />
+                </svg>
+                <span class="pj-timeline__media-caption">ẢNH TIẾN ĐỘ · 4:3</span>
+                @if (step.isLatest) {
+                  <span class="pj-timeline__latest-badge">Mới nhất</span>
+                }
+              </div>
+              <h3 class="pj-timeline__label">{{ step.label }}</h3>
+              <p class="pj-timeline__desc">{{ step.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- FAQ + consultation -->
+  @if (project().faqs.length) {
+    <section id="faq" class="pj-section">
+      <div class="pj-section__inner pj-faq">
+        <div class="pj-faq__main">
+          <div class="section-kicker">Hỏi đáp</div>
+          <h2 class="pj-section__title">Câu hỏi thường gặp</h2>
+          <div class="pj-faq__accordion">
+            <app-accordion [items]="project().faqs" />
+          </div>
+        </div>
+        <div class="pj-faq__consultation">
+          <div class="section-kicker section-kicker--on-dark">Đăng ký tư vấn</div>
+          <h2 class="pj-faq__consultation-title">Nhận bảng giá &amp; chính sách mới nhất</h2>
+          <p class="pj-faq__consultation-desc">
+            Chuyên viên dự án gọi lại trong 2 giờ làm việc, kèm file PDF bảng giá và giỏ hàng còn
+            lại.
+          </p>
+          <app-lead-form
+            theme="dark"
+            [interestOptions]="['2 PN · 62–72 m²', '1 PN · 45 m²', '3 PN · 88–110 m²']"
+            submitLabel="Gửi đăng ký"
+            consentText="Tôi đồng ý để AN CƯ liên hệ tư vấn dự án."
+            messagePlaceholder="Tôi muốn xem nhà mẫu cuối tuần."
+            footNote="Hoặc gọi trực tiếp 1900 6688 · 8:00–20:00"
+          />
+        </div>
+      </div>
+    </section>
+  }
+</app-page-shell>

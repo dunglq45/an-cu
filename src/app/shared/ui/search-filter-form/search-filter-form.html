@@ -1,0 +1,45 @@
+<div class="filter-form">
+  <div class="filter-group">
+    <div class="filter-group__label">Loại hình</div>
+    @if (layout() === 'sidebar') {
+      <app-filter-checkbox-group [options]="typeOptions" [(checked)]="selectedTypes" />
+    } @else {
+      <app-pill-toggle-group [options]="typePillOptions" [(selected)]="selectedTypePill" />
+    }
+  </div>
+
+  <div class="filter-group">
+    <div class="filter-group__label">Mức giá</div>
+    <app-price-range />
+  </div>
+
+  @if (layout() === 'sidebar') {
+    <div class="filter-group">
+      <div class="filter-group__label">Diện tích</div>
+      <app-pill-toggle-group [options]="areaOptions" [(selected)]="selectedArea" />
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-group__label">Số phòng ngủ</div>
+      <app-segmented-control
+        appearance="buttons"
+        [options]="bedroomOptions"
+        [(selected)]="selectedBedrooms"
+      />
+    </div>
+  } @else {
+    <div class="filter-group">
+      <div class="filter-group__label">Số phòng ngủ</div>
+      <app-segmented-control
+        appearance="buttons"
+        [options]="bedroomOptions"
+        [(selected)]="selectedBedrooms"
+      />
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-group__label">Diện tích</div>
+      <app-pill-toggle-group [options]="areaOptions" [(selected)]="selectedArea" />
+    </div>
+  }
+</div>

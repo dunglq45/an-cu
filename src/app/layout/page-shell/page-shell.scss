@@ -1,0 +1,19 @@
+@use 'breakpoints' as bp;
+
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-shell__content {
+  flex: 1;
+}
+
+.page-shell--with-bottom-nav {
+  @include bp.mobile {
+    .page-shell__content {
+      padding-bottom: 72px;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+<div class="gated-pricing">
+  <div class="section-kicker">Bảng giá</div>
+  <h2 class="gated-pricing__title">Bảng giá &amp; chính sách thanh toán</h2>
+  <p class="gated-pricing__subtitle">
+    Theo yêu cầu của chủ đầu tư, giá chi tiết từng căn chỉ hiển thị cho khách để lại số điện thoại.
+  </p>
+
+  <div class="gated-pricing__table-wrap">
+    <table class="gated-pricing__table">
+      <thead>
+        <tr>
+          <th>Mã căn</th>
+          <th>Loại</th>
+          <th>Diện tích</th>
+          <th>Hướng</th>
+          <th>Giá bán</th>
+          <th>Tình trạng</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of project().priceTable; track row.code) {
+          <tr
+            [class.gated-pricing__row--blurred]="row.gated && !unlocked()"
+            [attr.aria-hidden]="row.gated && !unlocked() ? true : null"
+          >
+            <td class="gated-pricing__code">{{ row.code }}</td>
+            <td class="gated-pricing__muted">{{ row.type }}</td>
+            <td class="gated-pricing__muted">{{ row.area }}</td>
+            <td class="gated-pricing__muted">{{ row.direction }}</td>
+            <td class="gated-pricing__price">{{ row.price }}</td>
+            <td>
+              <span class="badge" [class]="statusClass(row.status)">{{ row.status }}</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (!unlocked()) {
+      <div class="gated-pricing__overlay">
+        <div class="gated-pricing__gate-card">
+          <span class="gated-pricing__gate-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#16403A"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="10" width="16" height="11" rx="1" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              <path d="M12 14v3" />
+            </svg>
+          </span>
+          <div class="gated-pricing__gate-body">
+            <h3 class="gated-pricing__gate-title">
+              Xem đầy đủ {{ project().priceTable.length }} căn & giá chi tiết
+            </h3>
+            <app-lead-form
+              variant="phone-only"
+              helperText="Chỉ dùng để gửi bảng giá và tư vấn. Không chia sẻ cho bên thứ ba."
+              (submitted)="unlock()"
+            />
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="gated-pricing__schedule">
+    @for (stage of project().paymentSchedule; track stage.title) {
+      <div class="gated-pricing__schedule-card">
+        <div class="gated-pricing__schedule-title">{{ stage.title }}</div>
+        <div class="gated-pricing__schedule-percent">{{ stage.percent }}</div>
+        <div class="gated-pricing__schedule-desc">{{ stage.description }}</div>
+      </div>
+    }
+  </div>
+</div>

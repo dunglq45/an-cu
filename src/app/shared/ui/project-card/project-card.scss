@@ -1,0 +1,62 @@
+.project-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: block;
+}
+
+.project-card__media {
+  display: block;
+  height: 240px;
+  position: relative;
+}
+
+.project-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.project-card__body {
+  padding: 20px;
+}
+
+.project-card__kicker {
+  font: 600 12px/1 var(--font-sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.project-card__title {
+  display: block;
+  margin-top: 10px;
+  font: 600 21px/1.3 var(--font-serif);
+  color: var(--color-text);
+}
+
+.project-card__description {
+  margin-top: 10px;
+  font: 400 15px/1.62 var(--font-sans);
+  color: var(--color-text-muted);
+}
+
+.project-card__price-row {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.project-card__price-label {
+  font: 500 13px/1 var(--font-sans);
+  color: var(--color-text-muted);
+}
+
+.project-card__price {
+  font: 600 22px/1 var(--font-serif);
+  color: var(--color-primary);
+}

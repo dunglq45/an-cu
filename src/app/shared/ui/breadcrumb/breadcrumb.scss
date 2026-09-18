@@ -1,0 +1,31 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 400 13px/1 var(--font-sans);
+  color: var(--color-text-muted);
+
+  a {
+    color: var(--color-text-muted);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.breadcrumb--on-dark {
+  color: var(--color-on-dark-1);
+
+  a {
+    color: var(--color-on-dark-1);
+  }
+}
+
+.breadcrumb__current {
+  color: var(--color-text);
+}
+
+.breadcrumb--on-dark .breadcrumb__current {
+  color: var(--color-surface);
+}

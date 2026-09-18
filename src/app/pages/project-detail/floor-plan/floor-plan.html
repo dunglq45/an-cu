@@ -1,0 +1,350 @@
+<div class="floor-plan">
+  <div class="floor-plan__header">
+    <div>
+      <div class="section-kicker">Mặt bằng</div>
+      <h2 class="floor-plan__title">Chọn căn trực tiếp trên mặt bằng tầng</h2>
+      <p class="floor-plan__subtitle">
+        Bấm vào ô căn hộ để xem diện tích, số phòng và tình trạng bán. Dữ liệu cập nhật từ CĐT ngày
+        15/09/2026.
+      </p>
+    </div>
+    <div class="floor-plan__towers">
+      @for (tower of project().towers; track tower.id) {
+        <button
+          type="button"
+          class="floor-plan__tower-btn"
+          [class.floor-plan__tower-btn--active]="tower.id === currentTowerId()"
+          (click)="selectTower(tower.id)"
+        >
+          {{ tower.name }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="floor-plan__grid">
+    <div class="floor-plan__diagram-card">
+      <div class="floor-plan__toolbar">
+        <div class="floor-plan__floor-select">
+          <label for="fp-floor" class="field-label">Tầng</label>
+          <select id="fp-floor" class="select-input floor-plan__floor-select-input">
+            @for (floor of project().towers[0]?.floors; track floor) {
+              <option>Tầng {{ floor }}</option>
+            }
+          </select>
+        </div>
+        <div class="floor-plan__legend">
+          <span class="floor-plan__legend-item"
+            ><span
+              class="floor-plan__legend-swatch"
+              style="background: #fff; border-color: #16403a"
+            ></span
+            >Còn hàng</span
+          >
+          <span class="floor-plan__legend-item"
+            ><span
+              class="floor-plan__legend-swatch"
+              style="background: #f5ebd9; border-color: #a9762b"
+            ></span
+            >Đang giữ chỗ</span
+          >
+          <span class="floor-plan__legend-item"
+            ><span
+              class="floor-plan__legend-swatch"
+              style="background: #e6e1d6; border-color: #d5cfc1"
+            ></span
+            >Đã bán</span
+          >
+          <span class="floor-plan__legend-item"
+            ><span
+              class="floor-plan__legend-swatch"
+              style="background: #16403a; border-color: #16403a"
+            ></span
+            >Đang chọn</span
+          >
+        </div>
+      </div>
+
+      <svg
+        viewBox="0 0 900 520"
+        width="100%"
+        class="floor-plan__svg"
+        role="img"
+        aria-label="Mặt bằng tầng, chọn căn hộ"
+      >
+        <rect x="0" y="0" width="900" height="520" fill="#F7F4EE" />
+        <rect
+          x="36"
+          y="36"
+          width="828"
+          height="448"
+          fill="none"
+          stroke="#D5CFC1"
+          stroke-width="1"
+        />
+
+        @for (unit of unitsForTower(); track unit.id) {
+          <g
+            (click)="selectUnit(unit.id)"
+            class="floor-plan__unit"
+            [attr.aria-label]="'Căn ' + unit.code"
+          >
+            <rect
+              [attr.x]="unit.rect.x"
+              [attr.y]="unit.rect.y"
+              [attr.width]="unit.rect.width"
+              [attr.height]="unit.rect.height"
+              [attr.fill]="
+                unit.id === selectedUnit()?.id ? fillFor('selected') : fillFor(unit.status)
+              "
+              [attr.stroke]="
+                unit.id === selectedUnit()?.id ? strokeFor('selected') : strokeFor(unit.status)
+              "
+              stroke-width="1.5"
+            />
+            <text
+              [attr.x]="unit.rect.x + 16"
+              [attr.y]="unit.rect.y + 32"
+              font-family="Be Vietnam Pro"
+              font-size="17"
+              font-weight="600"
+              [attr.fill]="unit.id === selectedUnit()?.id ? '#F7F4EE' : labelColorFor(unit.status)"
+            >
+              {{ unit.code }}
+            </text>
+            <text
+              [attr.x]="unit.rect.x + 16"
+              [attr.y]="unit.rect.y + 56"
+              font-family="Be Vietnam Pro"
+              font-size="14"
+              [attr.fill]="unit.id === selectedUnit()?.id ? '#C3D1CB' : '#5A6663'"
+            >
+              {{ unit.area }} m² · {{ unit.bedrooms }} PN
+            </text>
+            @if (unit.status === 'sold') {
+              <text
+                [attr.x]="unit.rect.x + 16"
+                [attr.y]="unit.rect.y + unit.rect.height - 20"
+                font-family="Be Vietnam Pro"
+                font-size="12"
+                font-weight="600"
+                letter-spacing="1"
+                fill="#8C918A"
+              >
+                ĐÃ BÁN
+              </text>
+            } @else if (unit.status === 'reserved') {
+              <text
+                [attr.x]="unit.rect.x + 16"
+                [attr.y]="unit.rect.y + unit.rect.height - 20"
+                font-family="Be Vietnam Pro"
+                font-size="12"
+                font-weight="600"
+                letter-spacing="1"
+                fill="#6E4C18"
+              >
+                GIỮ CHỖ
+              </text>
+            } @else {
+              <text
+                [attr.x]="unit.rect.x + 16"
+                [attr.y]="unit.rect.y + unit.rect.height - 20"
+                font-family="Fraunces"
+                font-size="16"
+                font-weight="600"
+                [attr.fill]="unit.id === selectedUnit()?.id ? '#F7F4EE' : '#16403A'"
+              >
+                {{ unit.price }}
+              </text>
+            }
+          </g>
+        }
+
+        <rect
+          x="60"
+          y="228"
+          width="780"
+          height="64"
+          fill="#EDE9E0"
+          stroke="#D5CFC1"
+          stroke-width="1"
+        />
+        <text
+          x="76"
+          y="266"
+          font-family="Be Vietnam Pro"
+          font-size="13"
+          letter-spacing="1.5"
+          fill="#8C918A"
+        >
+          HÀNH LANG
+        </text>
+        <rect
+          x="396"
+          y="228"
+          width="108"
+          height="64"
+          fill="#E6E1D6"
+          stroke="#D5CFC1"
+          stroke-width="1"
+        />
+        <text
+          x="412"
+          y="256"
+          font-family="Be Vietnam Pro"
+          font-size="12"
+          font-weight="600"
+          fill="#5A6663"
+        >
+          THANG
+        </text>
+        <text
+          x="412"
+          y="274"
+          font-family="Be Vietnam Pro"
+          font-size="12"
+          font-weight="600"
+          fill="#5A6663"
+        >
+          MÁY
+        </text>
+      </svg>
+
+      @if (selectedUnit(); as unit) {
+        <div class="floor-plan__popup">
+          <div class="floor-plan__popup-header">
+            <div>
+              <div class="floor-plan__popup-code">Căn {{ unit.code }}</div>
+              <div class="floor-plan__popup-meta">Tầng {{ unit.floor }} · căn góc</div>
+            </div>
+            <span class="badge badge--verified">{{
+              unit.status === 'available'
+                ? 'Còn trống'
+                : unit.status === 'reserved'
+                  ? 'Giữ chỗ'
+                  : 'Đã bán'
+            }}</span>
+          </div>
+          <div class="floor-plan__popup-specs">
+            <div class="floor-plan__popup-spec">
+              <div class="floor-plan__popup-spec-label">Diện tích</div>
+              <div class="floor-plan__popup-spec-value">{{ unit.area }} m²</div>
+            </div>
+            <div class="floor-plan__popup-spec">
+              <div class="floor-plan__popup-spec-label">Phòng</div>
+              <div class="floor-plan__popup-spec-value">{{ unit.bedrooms }} PN</div>
+            </div>
+            <div class="floor-plan__popup-spec">
+              <div class="floor-plan__popup-spec-label">Hướng</div>
+              <div class="floor-plan__popup-spec-value">Đông Nam</div>
+            </div>
+            <div class="floor-plan__popup-spec">
+              <div class="floor-plan__popup-spec-label">Giá</div>
+              <div class="floor-plan__popup-spec-value floor-plan__popup-spec-value--price">
+                {{ unit.price || '—' }}
+              </div>
+            </div>
+          </div>
+          <div class="floor-plan__popup-actions">
+            <button type="button" class="btn btn--primary floor-plan__popup-view">
+              Xem chi tiết
+            </button>
+            <button
+              type="button"
+              aria-label="Đóng popup"
+              class="floor-plan__popup-close"
+              (click)="selectedUnitId.set(null)"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#14201D"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="floor-plan__sidebar">
+      @if (selectedUnit(); as unit) {
+        <div class="floor-plan__selected-card">
+          <div class="floor-plan__selected-top">
+            <span class="floor-plan__selected-kicker">Căn đang chọn</span>
+            <span class="badge badge--verified">{{
+              unit.status === 'available'
+                ? 'Còn hàng'
+                : unit.status === 'reserved'
+                  ? 'Giữ chỗ'
+                  : 'Đã bán'
+            }}</span>
+          </div>
+          <h3 class="floor-plan__selected-title">
+            Căn {{ unit.code }} ·
+            {{ currentTowerId() === project().towers[0]?.id ? project().towers[0]?.name : '' }}
+          </h3>
+          <div class="floor-plan__selected-sub">
+            Tầng {{ unit.floor }} · căn góc, ban công hướng Đông Nam
+          </div>
+          <div class="floor-plan__selected-media">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#8C918A"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" />
+              <path d="M3 13h9M12 3v18M12 8h9" />
+            </svg>
+            <span class="floor-plan__selected-media-caption">MẶT BẰNG CĂN · 4:3</span>
+          </div>
+          <div class="floor-plan__selected-grid">
+            <div>
+              <div class="floor-plan__selected-grid-label">Diện tích tim tường</div>
+              <div class="floor-plan__selected-grid-value">{{ unit.area }} m²</div>
+            </div>
+            <div>
+              <div class="floor-plan__selected-grid-label">Thông thuỷ</div>
+              <div class="floor-plan__selected-grid-value">
+                {{ unit.area - 3.6 | number: '1.1-1' }} m²
+              </div>
+            </div>
+            <div>
+              <div class="floor-plan__selected-grid-label">Phòng</div>
+              <div class="floor-plan__selected-grid-value">
+                {{ unit.bedrooms }} PN · {{ unit.bedrooms }} WC
+              </div>
+            </div>
+            <div>
+              <div class="floor-plan__selected-grid-label">Giá dự kiến</div>
+              <div class="floor-plan__selected-grid-value floor-plan__selected-grid-value--price">
+                {{ unit.price || '—' }}
+              </div>
+            </div>
+          </div>
+          <div class="floor-plan__selected-actions">
+            <button type="button" class="btn btn--primary">Nhận báo giá căn {{ unit.code }}</button>
+            <button type="button" class="btn btn--secondary">Tải mặt bằng PDF</button>
+          </div>
+        </div>
+      }
+      <div class="floor-plan__remaining-callout">
+        <div class="floor-plan__remaining-kicker">Còn lại tầng {{ selectedUnit()?.floor }}</div>
+        <div class="floor-plan__remaining-text">
+          {{ availableCount() }} căn còn hàng · {{ reservedCount() }} giữ chỗ · {{ soldCount() }} đã
+          bán. Giỏ hàng thay đổi theo ngày, môi giới xác nhận trước khi cọc.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
