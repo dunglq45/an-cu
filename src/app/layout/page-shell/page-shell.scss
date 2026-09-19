@@ -6,6 +6,14 @@
   min-height: 100vh;
 }
 
+app-header,
+app-mobile-topbar {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 .page-shell__content {
   flex: 1;
 }
