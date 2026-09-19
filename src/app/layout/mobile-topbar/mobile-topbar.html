@@ -18,7 +18,8 @@
     <span class="mobile-topbar__wordmark">AN CƯ</span>
   </a>
   <div class="mobile-topbar__actions">
-    <button type="button" aria-label="Thông báo" class="mobile-topbar__icon-btn">
+    <app-language-switcher [onDark]="true" />
+    <button type="button" [attr.aria-label]="i18n.t('topbar.notifications')" class="mobile-topbar__icon-btn">
       <svg
         width="20"
         height="20"
@@ -33,7 +34,7 @@
         <path d="M10 19a2 2 0 0 0 4 0" />
       </svg>
     </button>
-    <button type="button" aria-label="Menu" class="mobile-topbar__icon-btn">
+    <button type="button" [attr.aria-label]="i18n.t('topbar.menu')" class="mobile-topbar__icon-btn">
       <svg
         width="20"
         height="20"

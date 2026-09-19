@@ -3,6 +3,7 @@ import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 import { MobileTopbar } from '../mobile-topbar/mobile-topbar';
 import { MobileBottomNav } from '../mobile-bottom-nav/mobile-bottom-nav';
+import { TranslationKey } from '../../core/i18n/translations';
 import { HeaderNavKey } from '../header/header';
 
 @Component({
@@ -15,6 +16,6 @@ export class PageShell {
   footerVariant = input<'full' | 'compact' | 'none'>('full');
   showBottomNav = input(false);
   activeNav = input<HeaderNavKey | null>(null);
-  ctaLabel = input('Ký gửi BĐS');
+  ctaKey = input<TranslationKey>('cta.consign');
   showPhoneIcon = input(false);
 }

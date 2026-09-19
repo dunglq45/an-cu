@@ -1,7 +1,7 @@
 @if (variant() === 'compact') {
   <footer class="app-footer app-footer--compact">
     <span class="app-footer__wordmark app-footer__wordmark--compact">AN CƯ</span>
-    <span class="app-footer__compact-note">© 2026 AN CƯ · {{ compactNote() }}</span>
+    <span class="app-footer__compact-note">© 2026 AN CƯ · {{ compactNote() ?? i18n.t('footer.compactNote') }}</span>
   </footer>
 } @else {
   <footer class="app-footer">
@@ -26,40 +26,40 @@
           <span class="app-footer__wordmark">AN CƯ</span>
         </div>
         <p class="app-footer__desc">
-          Sàn phân phối bất động sản — mua bán, cho thuê và phân phối dự án tại Việt Nam.
+          {{ i18n.t('footer.desc') }}
         </p>
         <p class="app-footer__address">
-          120 Nguyễn Huệ, Quận 1, TP.HCM<br />hello&#64;ancu.vn · 1900 6688
+          {{ i18n.t('footer.address') }}<br />hello&#64;ancu.vn · 1900 6688
         </p>
       </div>
       <div>
-        <div class="app-footer__col-title">Danh mục</div>
+        <div class="app-footer__col-title">{{ i18n.t('footer.categories') }}</div>
         <div class="app-footer__col-links">
-          <a routerLink="/tim-kiem">Mua bán căn hộ</a>
-          <a routerLink="/tim-kiem">Nhà phố · biệt thự</a>
-          <a routerLink="/tim-kiem">Cho thuê</a>
-          <a routerLink="/">Dự án mở bán</a>
+          <a routerLink="/tim-kiem">{{ i18n.t('footer.buyApartments') }}</a>
+          <a routerLink="/tim-kiem">{{ i18n.t('footer.housesVillas') }}</a>
+          <a routerLink="/tim-kiem">{{ i18n.t('footer.rent') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.openProjects') }}</a>
         </div>
       </div>
       <div>
-        <div class="app-footer__col-title">Công ty</div>
+        <div class="app-footer__col-title">{{ i18n.t('footer.company') }}</div>
         <div class="app-footer__col-links">
-          <a routerLink="/">Về AN CƯ</a>
-          <a routerLink="/">Tuyển dụng</a>
-          <a routerLink="/">Hợp tác môi giới</a>
-          <a routerLink="/">Tin tức</a>
+          <a routerLink="/">{{ i18n.t('footer.about') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.careers') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.brokerPartner') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.news') }}</a>
         </div>
       </div>
       <div>
-        <div class="app-footer__col-title">Hỗ trợ</div>
+        <div class="app-footer__col-title">{{ i18n.t('footer.support') }}</div>
         <div class="app-footer__col-links">
-          <a routerLink="/">Hướng dẫn đăng tin</a>
-          <a routerLink="/">Quy chế hoạt động</a>
-          <a routerLink="/">Chính sách bảo mật</a>
-          <a routerLink="/">Liên hệ</a>
+          <a routerLink="/">{{ i18n.t('footer.postGuide') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.regulations') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.privacy') }}</a>
+          <a routerLink="/">{{ i18n.t('footer.contact') }}</a>
         </div>
       </div>
     </div>
-    <div class="app-footer__bottom">© 2026 AN CƯ. Giấy phép sàn giao dịch BĐS số 041/SGD-BXD.</div>
+    <div class="app-footer__bottom">© 2026 AN CƯ. {{ i18n.t('footer.license') }}</div>
   </footer>
 }

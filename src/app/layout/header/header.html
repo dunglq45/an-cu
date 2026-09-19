@@ -24,35 +24,36 @@
         routerLink="/tim-kiem"
         class="app-header__nav-link"
         [class.app-header__nav-link--active]="activeNav() === 'mua-ban'"
-        >Mua bán</a
+        >{{ i18n.t('nav.buy') }}</a
       >
       <a
         routerLink="/tim-kiem"
         class="app-header__nav-link"
         [class.app-header__nav-link--active]="activeNav() === 'cho-thue'"
-        >Cho thuê</a
+        >{{ i18n.t('nav.rent') }}</a
       >
       <a
         routerLink="/"
         class="app-header__nav-link"
         [class.app-header__nav-link--active]="activeNav() === 'du-an'"
-        >Dự án</a
+        >{{ i18n.t('nav.projects') }}</a
       >
       <a
         routerLink="/"
         class="app-header__nav-link"
         [class.app-header__nav-link--active]="activeNav() === 'moi-gioi'"
-        >Môi giới</a
+        >{{ i18n.t('nav.agents') }}</a
       >
       <a
         routerLink="/"
         class="app-header__nav-link"
         [class.app-header__nav-link--active]="activeNav() === 'tin-tuc'"
-        >Tin tức</a
+        >{{ i18n.t('nav.news') }}</a
       >
     </nav>
   </div>
   <div class="app-header__right">
+    <app-language-switcher />
     @if (showPhoneIcon()) {
       <a routerLink="/" class="app-header__phone-link">
         <svg
@@ -73,6 +74,6 @@
     } @else {
       <span class="app-header__phone-text">1900 6688</span>
     }
-    <button type="button" class="btn btn--primary">{{ ctaLabel() }}</button>
+    <button type="button" class="btn btn--primary">{{ i18n.t(ctaKey()) }}</button>
   </div>
 </header>

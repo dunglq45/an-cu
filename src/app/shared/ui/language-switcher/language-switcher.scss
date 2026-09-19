@@ -1,0 +1,109 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang {
+  position: relative;
+  display: inline-block;
+}
+
+.lang__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: var(--control-height-sm);
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-text);
+  font: 500 14px/1 var(--font-sans);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+.lang__chevron {
+  color: var(--color-text-muted);
+  transition: transform 0.15s;
+}
+
+.lang__chevron--open {
+  transform: rotate(180deg);
+}
+
+.lang__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 200;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-popup);
+}
+
+.lang__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text);
+  font: 500 14px/1 var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-surface);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+}
+
+.lang__option--active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.lang--on-dark {
+  .lang__trigger {
+    border-color: rgba(247, 244, 238, 0.28);
+    color: var(--color-surface);
+    height: 36px;
+    padding: 0 10px;
+
+    &:hover {
+      background: rgba(247, 244, 238, 0.12);
+      border-color: rgba(247, 244, 238, 0.5);
+    }
+  }
+
+  .lang__chevron {
+    color: var(--color-on-dark-1);
+  }
+}
